@@ -30,7 +30,6 @@ class TestUnitaire(unittest.TestCase):
         res = test.roll_again
         assert isinstance(res, str) == True
         
-        
     def test3(self):
         assert min_val == 1 and max_val == 6
     
