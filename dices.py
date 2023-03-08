@@ -18,6 +18,12 @@ class test:
         if roll_again == "no" or "n":
             break
         
+""""
+if __name__ == '__main__':
+    unittest.main()
+"""
+    
+
 
         
 
