@@ -18,16 +18,11 @@ class test:
         if roll_again == "no" or "n":
             break
         
-""""
-class TestUnitaire(unittest.TestCase):
+
+        
 
     
-    
-if __name__ == '__main__':
-    unittest.main()
+  
+
         
-   """" 
-        
-        
-        
-        
+   
