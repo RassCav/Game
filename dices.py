@@ -22,8 +22,6 @@ while roll_again == "yes" or roll_again == "y":
     roll_again = input("Roll the Dices Again? : ")
     if roll_again == "no" or "n":
         break
-""""
-""""
 
 if __name__ == '__main__':
     unittest.main()
