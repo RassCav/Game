@@ -1,5 +1,4 @@
 import random
-import unittest
 
 global min_val, max_val
 min_val = 1
