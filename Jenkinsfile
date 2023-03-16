@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+        dockerImage = ''
+        registry = 'rascav/PythonApp'
+    }
     triggers {
       pollSCM 'H/2 * * * *'
     }
@@ -27,7 +31,9 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t my-docker-image .'
+                script {
+                    dockerImage = docker.build registry
+                }
             }
         }
         
