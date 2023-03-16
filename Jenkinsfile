@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    environment {
-      dockerImage = ''
-      registry = 'rascav/dicesApp'
-    }
     triggers {
       pollSCM 'H/2 * * * *'
     }
