@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-      dockerImage = ''
       registry = 'rascav/dicesApp'
+      registryCredential = 'dockerhub_id'
     }
     triggers {
       pollSCM 'H/2 * * * *'
@@ -31,7 +31,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                script {
-                  dockerImage = docker.build registry
+                  docker.build registry + ":$BUILD_NUMBER"
                }
             }
         }
