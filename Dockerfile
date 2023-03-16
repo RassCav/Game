@@ -1,6 +1,4 @@
-FROM alpine:3.5
-
-RUN apk add --update py2-pip
+FROM python:3.8-slim-buster
 
 COPY requirements.txt /tmp/requirements.txt
 
