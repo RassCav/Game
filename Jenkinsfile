@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        dockerImage = ''
-        registry = 'rascav/PythonApp'
+      dockerImage = ''
+      registry = 'rascav/dicesApp'
     }
     triggers {
       pollSCM 'H/2 * * * *'
@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/RassCav/Game.git']])'
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/RassCav/Game.git']])
             }
         }
         stage('Build') {
@@ -28,8 +28,13 @@ pipeline {
                 sh 'python3 -m pytest'
             }
         }
-        
-        
+        stage('Build Docker Image') {
+            steps {
+               script {
+                  sh 'dockerImage = docker.build registry'
+               }
+            }
+        }
         
     }
     post {
