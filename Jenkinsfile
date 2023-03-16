@@ -29,13 +29,7 @@ pipeline {
                 sh 'python3 -m pytest'
             }
         }
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    dockerImage = docker.build registry
-                }
-            }
-        }
+        
         
         
     }
