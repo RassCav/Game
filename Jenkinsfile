@@ -1,9 +1,9 @@
 pipeline {
-    agent any
-    environment {
-      registry = 'rascav/dicesApp'
-      registryCredential = 'dockerhub_id'
-    }
+    agent {
+        docker {
+            image 'docker:latest'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
+        }
     triggers {
       pollSCM 'H/2 * * * *'
     }
