@@ -1,31 +1,31 @@
 pipeline {
-  agent any
-  options {
-    buildDiscarder(logRotator(numToKeepStr: '5'))
-  }
-  environment {
-    DOCKERHUB_CREDENTIALS = credentials('dockerhub')
-  }
-  stages {
-    stage('Build') {
-      steps {
-        sh 'docker build -t rascav/jenkins-docker-hub .'
-      }
+    agent any
+    
+    options {
+        timeout(time: 10, unit: 'MINUTES') 
     }
-    stage('Login') {
-      steps {
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-      }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/RassCav/Game.git']])
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'python dices.py'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'python3 -m pytest'
+            }
+        }
+        
     }
-    stage('Push') {
-      steps {
-        sh 'docker push rascav/jenkins-docker-hub'
-      }
-    }
-  }
-  post {
-    always {
-      sh 'docker logout'
-    }
-  }
+    post {
+        always {
+                slackSend channel: 'dices', message: "Hello HAMZA SIAD  your project status is ${currentBuild.currentResult}"
+                }
+        }
 }
