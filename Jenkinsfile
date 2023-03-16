@@ -24,11 +24,11 @@ pipeline {
                 sh 'python3 -m pytest'
             }
         }
-        stage('Build') {
+        stage('Build Image') {
             steps {
-                sh 'docker build -t dices .'
-      }
-    }
+                sh 'docker build -t dices:0.1 .'
+            }
+        }
         
     }
     post {
