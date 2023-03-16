@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-              pip install requirements.txt
+              sh 'pip install -r requirements.txt'
               sh 'python dices.py'
             }
         }
