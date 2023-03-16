@@ -11,6 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/RassCav/Game.git']])
+'
             }
         }
         stage('Build') {
@@ -22,6 +23,11 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'python3 -m pytest'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t my-docker-image .'
             }
         }
         
