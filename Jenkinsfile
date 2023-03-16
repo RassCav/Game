@@ -28,6 +28,12 @@ pipeline {
                 sh 'python3 -m pytest'
             }
         }
+         stage('Initialize'){
+        steps {
+        def dockerHome = tool 'myDocker'
+        env.PATH = "${dockerHome}/bin:${env.PATH}"
+          }
+          }
         stage('Build Docker Image') {
             steps {
                sh 'docker build -t dices:0.1 .'
