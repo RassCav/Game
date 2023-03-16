@@ -30,7 +30,9 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-               sh 'docker build -t dices:0.1 .'
+                script {
+                    def dockerImage = docker.build('my-docker-image:latest', '-f Dockerfile .')
+                }
             }
         }
         
