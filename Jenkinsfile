@@ -30,9 +30,7 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-               script {
-                  docker.build registry + ":$BUILD_NUMBER"
-               }
+               sh 'docker build -t dices:0.1 .'
             }
         }
         
