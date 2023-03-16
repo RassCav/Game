@@ -1,7 +1,11 @@
 pipeline {
     agent any
+    environment {
+      dockerImage = ''
+      registry = 'rascav/dicesApp'
+    }
     triggers {
-      pollSCM '*/5 * * * *'
+      pollSCM 'H/2 * * * *'
     }
     options {
         timeout(time: 10, unit: 'MINUTES') 
@@ -22,6 +26,13 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'python3 -m pytest'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+               script {
+                  dockerImage = docker.build registry
+               }
             }
         }
         
