@@ -30,8 +30,6 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-              def dockerHome = tool 'myDocker'
-              env.PATH = "${dockerHome}/bin:${env.PATH}"
                sh 'docker build -t dices:0.1 .'
             }
         }
